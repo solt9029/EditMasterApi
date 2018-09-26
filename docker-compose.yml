@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  php:
+    build: ./docker/php
+    ports:
+      - "8051:80"
+    volumes:
+      - .:/php
+    depends_on:
+      - mysql
+  mysql:
+    build: ./docker/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=phpapptest
+      - MYSQL_DATABASE=editmaster
+    tty: true
