@@ -1,4 +1,5 @@
 <?php
+
 return PhpCsFixer\Config::create()
     ->setRules([
         '@Symfony' => true,
@@ -7,7 +8,7 @@ return PhpCsFixer\Config::create()
         ->exclude('vendor')
         ->exclude('public/hot')
         ->exclude('public/storage')
-        ->exclude('storage')
+        ->exclude('storage/*.key')
         ->in(__DIR__)
         ->name('*.php')
         ->notName('*.blade.php')
