@@ -27,7 +27,6 @@ class ScoresTableSeeder extends Seeder
             'bpm' => 180,
             'offset' => 1.8,
             'note_ids' => $note_ids_json,
-            'color_theme' => 'black',
             'advanced_settings' => null,
         ]);
     }

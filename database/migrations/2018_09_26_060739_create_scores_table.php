@@ -19,7 +19,6 @@ class CreateScoresTable extends Migration
             $table->double('bpm');
             $table->double('offset');
             $table->json('note_ids');
-            $table->string('color_theme');
             $table->json('advanced_settings')->nullable();
             $table->timestamps();
         });
