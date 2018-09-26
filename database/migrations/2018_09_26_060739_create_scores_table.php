@@ -18,6 +18,7 @@ class CreateScoresTable extends Migration
             $table->string('video_id');
             $table->double('bpm');
             $table->double('offset');
+            $table->double('speed');
             $table->json('note_ids');
             $table->json('advanced_settings')->nullable();
             $table->timestamps();
