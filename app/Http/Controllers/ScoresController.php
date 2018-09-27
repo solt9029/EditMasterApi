@@ -11,7 +11,7 @@ class ScoresController extends Controller
 {
     public function index()
     {
-        return Score::paginate(24);
+        return Score::latest('id')->paginate(24);
     }
 
     public function show($id)
