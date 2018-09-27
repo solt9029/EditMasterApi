@@ -106,5 +106,12 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-    'attributes' => [],
+    'attributes' => [
+        'username' => 'ユーザ名',
+        'bpm' => 'BPM',
+        'offset' => 'OFFSET：曲の始まる時間（秒）',
+        'speed' => '倍速',
+        'videoId' => 'YouTubeの動画ID',
+        'noteIds' => '譜面データ',
+    ],
 ];
