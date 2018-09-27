@@ -10,25 +10,31 @@ class ScoresTableSeeder extends Seeder
      */
     public function run()
     {
-        $note_ids_array = [];
-        for ($i = 0; $i < 96 * 2; ++$i) {
-            if (0 === $i % 24) {
-                $note_ids_array[] = 1;
-            } else {
-                $note_ids_array[] = 0;
-            }
-        }
-        $note_ids_json = json_encode($note_ids_array);
+        $faker = \Faker\Factory::create('ja_JP');
 
-        for ($i = 0; $i < 1000; ++$i) {
+        for ($i = 0; $i < 100; ++$i) {
+            $note_ids_array = [];
+            $notes_per_bar = 96;
+            $bar_num = mt_rand(3, 5);
+            for ($j = 0; $j < $notes_per_bar * $bar_num; ++$j) {
+                $note_id = 0;
+                if (0 === $j % ($notes_per_bar / 16)) {
+                    $note_id = mt_rand(0, 4);
+                }
+                $note_ids_array[] = $note_id;
+            }
+            $note_ids_json = json_encode($note_ids_array);
+
+            $video_ids = ['rnSsptZaYsM', 'E6EMm88R4Ck', 'poiZSEjQBgw', 'O26hv3RntgA', 'JwmTXEWr41U'];
+
             DB::table('scores')->insert([
-                'username' => '通りすがりの創作の達人',
-                'comment' => '創作譜面をしました。',
-                'video_id' => 'rnSsptZaYsM',
-                'bpm' => 180,
-                'offset' => 1.7,
+                'username' => $faker->userName,
+                'comment' => $faker->text,
+                'video_id' => $video_ids[mt_rand(0, 4)],
+                'bpm' => mt_rand(100, 200),
+                'offset' => mt_rand(1, 10),
                 'note_ids' => $note_ids_json,
-                'speed' => 1,
+                'speed' => mt_rand(1, 3),
                 'advanced_settings' => null,
             ]);
         }
