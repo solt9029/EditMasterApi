@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('/scores/{id}', 'ScoresController@show');
 Route::post('/scores/create', 'ScoresController@create');
+Route::get('/scores', 'ScoresController@index');

@@ -9,6 +9,11 @@ use App\Rules\ValidNoteIds;
 
 class ScoresController extends Controller
 {
+    public function index()
+    {
+        return Score::paginate(24);
+    }
+
     public function show($id)
     {
         $score = Score::find($id);
