@@ -14,7 +14,7 @@ class CreateScoresTable extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->string('video_id');
             $table->double('bpm');
             $table->double('offset');

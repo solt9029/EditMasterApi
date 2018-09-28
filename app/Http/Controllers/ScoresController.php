@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Score;
 use Illuminate\Http\Request;
 use App\Rules\ValidVideoId;
+use App\Rules\ValidNotes;
 
 class ScoresController extends Controller
 {
