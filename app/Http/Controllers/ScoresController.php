@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Score;
 use Illuminate\Http\Request;
 use App\Rules\ValidVideoId;
-use App\Rules\ValidNoteIds;
 
 class ScoresController extends Controller
 {
@@ -33,7 +32,7 @@ class ScoresController extends Controller
             'offset' => ['required', 'numeric'],
             'speed' => ['required', 'numeric'],
             'comment' => 'max:140',
-            'noteIds' => ['required', new ValidNoteIds()],
+            'notes' => ['required', new ValidNotes()],
         ]);
 
         Score::create([
@@ -42,7 +41,7 @@ class ScoresController extends Controller
             'video_id' => $request->videoId,
             'bpm' => $request->bpm,
             'offset' => $request->offset,
-            'note_ids' => json_encode($request->noteIds),
+            'notes' => json_encode($request->notes),
             'speed' => $request->speed,
             // 'advanced_settings' => null,
         ]);

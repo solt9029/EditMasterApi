@@ -112,6 +112,6 @@ return [
         'offset' => 'OFFSET：曲の始まる時間（秒）',
         'speed' => '倍速',
         'videoId' => 'YouTubeの動画ID',
-        'noteIds' => '譜面データ',
+        'notes' => '譜面データ',
     ],
 ];

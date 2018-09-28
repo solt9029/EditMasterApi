@@ -19,7 +19,7 @@ class CreateScoresTable extends Migration
             $table->double('bpm');
             $table->double('offset');
             $table->double('speed');
-            $table->json('note_ids');
+            $table->json('notes');
             $table->json('advanced_settings')->nullable();
             $table->timestamps();
         });

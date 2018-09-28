@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ValidNoteIds implements Rule
+class ValidNotes implements Rule
 {
     /**
      * Determine if the validation rule passes.
