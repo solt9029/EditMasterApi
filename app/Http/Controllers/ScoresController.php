@@ -9,9 +9,17 @@ use App\Rules\ValidNotes;
 
 class ScoresController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Score::latest('id')->paginate(24);
+        $keyword = $request->input('keyword');
+        $query = Score::query();
+        $columns = ['username', 'comment', 'video_id', 'bpm', 'offset', 'speed'];
+        foreach ($columns as $column) {
+            $query->orWhere($column, 'like', "%{$keyword}%");
+        }
+        $scores = $query->latest('id')->paginate(24);
+
+        return response()->json($scores, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     public function show($id)
