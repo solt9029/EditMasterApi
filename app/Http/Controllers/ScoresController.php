@@ -36,7 +36,7 @@ class ScoresController extends Controller
             'notes' => ['required', new ValidNotes()],
         ]);
 
-        Score::create([
+        $score = Score::create([
             'username' => $request->username,
             'comment' => $request->comment,
             'video_id' => $request->videoId,
@@ -47,6 +47,6 @@ class ScoresController extends Controller
             // 'advanced_settings' => null,
         ]);
 
-        return response()->json(['message' => 'Created successfully!'], 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json(['message' => 'Created successfully!', 'id' => $score->id], 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
