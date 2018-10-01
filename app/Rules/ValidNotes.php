@@ -16,8 +16,16 @@ class ValidNotes implements Rule
      */
     public function passes($attribute, $value)
     {
+        // check length
         if (0 !== count($value) % 96) {
             return false;
+        }
+
+        // check note
+        foreach ($value as $note) {
+            if ($note > 7) {
+                return false;
+            }
         }
 
         return true;
