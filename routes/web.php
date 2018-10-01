@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/scores/{id}', 'ScoresController@show');
 Route::post('/scores/create', 'ScoresController@create');
 Route::get('/scores', 'ScoresController@index');
