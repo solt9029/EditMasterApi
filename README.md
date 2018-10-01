@@ -16,4 +16,16 @@
 ```
 git clone git@github.com:solt9029/EditMasterApi.git
 cd EditMasterApi
+composer install
+cp .env.example .env
+# edit .env file.
+php artisan key:generate
+docker-compose build
+docker-compose up -d
 ```
+
+## Database
+
+- The database of old version system is automatically imported from /docker/mysql/180930.sql through Dockerfile.
+
+- You no longer need to use artisan migrate commands.
