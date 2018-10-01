@@ -36,7 +36,7 @@ class ScoresController extends Controller
     {
         $request->validate([
             'username' => ['required', 'max:20'],
-            'videoId' => ['required', new ValidVideoId()],
+            'video_id' => ['required', new ValidVideoId()],
             'bpm' => ['required', 'numeric'],
             'offset' => ['required', 'numeric'],
             'speed' => ['required', 'numeric'],
@@ -47,7 +47,7 @@ class ScoresController extends Controller
         $score = Score::create([
             'username' => $request->username,
             'comment' => $request->comment,
-            'video_id' => $request->videoId,
+            'video_id' => $request->video_id,
             'bpm' => $request->bpm,
             'offset' => $request->offset,
             'notes' => json_encode($request->notes),

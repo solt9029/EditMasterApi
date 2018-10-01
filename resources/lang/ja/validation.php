@@ -111,7 +111,7 @@ return [
         'bpm' => 'BPM',
         'offset' => 'OFFSET：曲の始まる時間（秒）',
         'speed' => '倍速',
-        'videoId' => 'YouTubeの動画ID',
+        'video_id' => 'YouTubeの動画ID',
         'notes' => '譜面データ',
     ],
 ];
