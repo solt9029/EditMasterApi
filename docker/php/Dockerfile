@@ -16,8 +16,18 @@ RUN apt-get update
 RUN apt-get install -y libpng-dev
 RUN docker-php-ext-install pdo_mysql mysqli mbstring gd
 
+# install zip and unzip
+RUN apt-get install -y zip unzip
+
 # enable mod_rewrite (http://murayama.hatenablog.com/entry/2015/09/10/081522)
 RUN a2enmod rewrite
+
+# install composer
+WORKDIR /
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv /composer.phar /usr/local/bin/composer
+
+
 
 WORKDIR /php
 
