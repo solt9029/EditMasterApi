@@ -16,13 +16,18 @@
 ```
 git clone git@github.com:solt9029/EditMasterApi.git
 cd EditMasterApi
+docker-compose build
+docker-compose up -d
+docker-compose exec php bash
+```
+
+```
 composer install
 cp .env.example .env
 # edit .env file.
 php artisan key:generate
-docker-compose build
-docker-compose up -d
 ```
+
 
 ## Database
 
