@@ -113,5 +113,6 @@ return [
         'speed' => '倍速',
         'video_id' => 'YouTubeの動画ID',
         'notes' => '譜面データ',
+        'comment' => 'コメント',
     ],
 ];
