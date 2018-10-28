@@ -14,4 +14,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=phpapptest
       - MYSQL_DATABASE=editmaster
+    volumes:
+      - ./docker/mysql:/dump
     tty: true
