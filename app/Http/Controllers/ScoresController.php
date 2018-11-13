@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Rules\ValidVideoId;
-use App\Rules\ValidNotes;
 use App\Repositories\ScoreRepositoryInterface;
+use App\Http\Requests\ScoreCreateRequest;
 
 class ScoresController extends Controller
 {
@@ -33,18 +32,8 @@ class ScoresController extends Controller
         return response()->json($score, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
-    public function create(Request $request)
+    public function create(ScoreCreateRequest $request)
     {
-        $request->validate([
-            'username' => ['required', 'max:20'],
-            'video_id' => ['required', new ValidVideoId()],
-            'bpm' => ['required', 'numeric'],
-            'offset' => ['required', 'numeric'],
-            'speed' => ['required', 'numeric'],
-            'comment' => 'max:140',
-            'notes' => ['required', new ValidNotes()],
-        ]);
-
         $request->notes = json_encode($request->notes);
         $score = $this->score_repository->create($request);
 
