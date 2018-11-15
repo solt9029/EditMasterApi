@@ -1,4 +1,7 @@
 # EditMasterApi
+
+[![StyleCI](https://github.styleci.io/repos/148159653/shield?branch=master)](https://github.styleci.io/repos/148159653)
+
 ## Environment
 
 - docker: 18.06.1-ce
