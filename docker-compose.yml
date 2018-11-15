@@ -3,6 +3,9 @@ version: '2'
 services:
   php:
     build: ./docker/php
+    environment:
+      - APACHE_DOCUMENT_ROOT=/php/public
+      - TZ=Asia/Tokyo
     ports:
       - "8051:80"
     volumes:
@@ -15,5 +18,5 @@ services:
       - MYSQL_ROOT_PASSWORD=phpapptest
       - MYSQL_DATABASE=editmaster
     volumes:
-      - ./docker/mysql:/dump
+      - ./docker/mysql:/docker
     tty: true
