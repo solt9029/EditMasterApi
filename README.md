@@ -22,7 +22,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-## PHP
+### PHP
 
 ```
 docker-compose exec php bash
@@ -34,7 +34,7 @@ php artisan migrate
 exit
 ```
 
-## MySQL
+### MySQL
 
 ```
 docker-compose exec mysql bash
