@@ -44,6 +44,7 @@ class ImportDatabase extends Command
             $result = file_get_contents($url);
             if ('' === $result) {
                 echo "${i} seems to be empty...\n";
+
                 continue;
             }
             $result = json_decode($result);
