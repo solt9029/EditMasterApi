@@ -47,7 +47,6 @@ exit
 - on the server
 
 ```
-ssh solt9029
 cd /usr/share/nginx/html/EditMasterApi/
 docker exec -it editmasterapi_mysql_1 bash
 ```
