@@ -41,3 +41,25 @@ docker-compose exec mysql bash
 mysql -uroot -pphpapptest editmaster < /docker/181115-insert-scores.sql # insert data dumped on 2018/11/15 into scores table.
 exit
 ```
+
+## Backup
+
+- on the server
+
+```
+ssh solt9029
+cd /usr/share/nginx/html/EditMasterApi/
+docker exec -it editmasterapi_mysql_1 bash
+```
+
+- on the mysql container
+
+```
+mysqldump -u root -pphpapptest --no-create-info editmaster scores > /docker/XXXXXX-insert-scores.sql
+```
+
+- on the local machine
+
+```
+scp root@solt9029.com:/usr/share/nginx/html/EditMasterApi/docker/mysql/XXXXXX-insert-scores.sql ~/Desktop
+```
