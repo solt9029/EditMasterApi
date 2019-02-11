@@ -29,6 +29,23 @@ class ScoreRepository implements ScoreRepositoryInterface
     }
 
     /**
+     * get records for timeline.
+     *
+     * @param int      $count
+     * @param int|null $max_id
+     * @param int      $since_id
+     */
+    public function getTimelineRecords($count = 24, $max_id = null, $since_id = 0)
+    {
+        $query = $this->score->where('id', '>', $since_id);
+        if (null !== $max_id) {
+            $query = $query->where('id', '<=', $max_id);
+        }
+
+        return $query->orderBy('id', 'DESC')->take($count)->get();
+    }
+
+    /**
      * keyword search and paginate.
      *
      * @param string $keyword

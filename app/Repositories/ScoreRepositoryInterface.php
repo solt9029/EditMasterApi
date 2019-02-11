@@ -14,6 +14,15 @@ interface ScoreRepositoryInterface
     public function findById($id);
 
     /**
+     * get records for timeline.
+     *
+     * @param int      $count
+     * @param int|null $max_id
+     * @param int      $since_id
+     */
+    public function getTimelineRecords($count, $max_id, $since_id);
+
+    /**
      * keyword search and paginate.
      *
      * @param string $keyword

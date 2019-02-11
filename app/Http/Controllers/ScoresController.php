@@ -22,6 +22,17 @@ class ScoresController extends Controller
         return response()->json($scores, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
+    public function timeline(Request $request)
+    {
+        $count = $request->input('count') ? $request->input('count') : 24;
+        $max_id = $request->input('max_id') ? $request->input('max_id') : null;
+        $since_id = $request->input('since_id') ? $request->input('since_id') : 0;
+
+        $scores = $this->score_repository->getTimelineRecords($count, $max_id, $since_id);
+
+        return response()->json($scores, 200, [], JSON_UNESCAPED_UNICODE);
+    }
+
     public function show($id)
     {
         $score = $this->score_repository->findById($id);
