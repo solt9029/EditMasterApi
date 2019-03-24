@@ -17,10 +17,11 @@ interface ScoreRepositoryInterface
      * get records for timeline.
      *
      * @param int      $count
+     * @param string   $keyword
      * @param int|null $max_id
      * @param int      $since_id
      */
-    public function getTimelineRecords($count, $max_id, $since_id);
+    public function getTimelineRecords($count, $keyword, $max_id, $since_id);
 
     /**
      * keyword search and paginate.

@@ -32,15 +32,25 @@ class ScoreRepository implements ScoreRepositoryInterface
      * get records for timeline.
      *
      * @param int      $count
+     * @param string   $keyword
      * @param int|null $max_id
      * @param int      $since_id
      */
-    public function getTimelineRecords($count = 24, $max_id = null, $since_id = 0)
+    public function getTimelineRecords($count = 24, $keyword = '', $max_id = null, $since_id = 0)
     {
-        $query = $this->score->where('id', '>', $since_id);
+        $query = $this->score->query();
+
+        $query->where('id', '>', $since_id);
         if (null !== $max_id) {
-            $query = $query->where('id', '<=', $max_id);
+            $query->where('id', '<=', $max_id);
         }
+
+        $columns = ['username', 'comment', 'video_id', 'bpm', 'offset', 'speed'];
+        $query->where(function ($query) use ($columns, $keyword) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, 'like', "%{$keyword}%");
+            }
+        });
 
         return $query->orderBy('id', 'DESC')->take($count)->get();
     }
