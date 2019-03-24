@@ -24,10 +24,10 @@ class ScoresController extends Controller
 
     public function timeline(Request $request)
     {
-        $count = $request->input('count') ? $request->input('count') : 24;
-        $keyword = $request->input('keyword') ? $request->input('keyword') : '';
-        $max_id = $request->input('max_id') ? $request->input('max_id') : null;
-        $since_id = $request->input('since_id') ? $request->input('since_id') : 0;
+        $count = null !== $request->input('count') ? $request->input('count') : 24;
+        $keyword = null !== $request->input('keyword') ? $request->input('keyword') : '';
+        $max_id = null !== $request->input('max_id') ? $request->input('max_id') : null;
+        $since_id = null !== $request->input('since_id') ? $request->input('since_id') : 0;
 
         $scores = $this->score_repository->getTimelineRecords($count, $keyword, $max_id, $since_id);
 
