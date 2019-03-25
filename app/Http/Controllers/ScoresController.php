@@ -46,7 +46,6 @@ class ScoresController extends Controller
 
     public function create(ScoreCreateRequest $request)
     {
-        $request->notes = json_encode($request->notes);
         $score = $this->score_repository->create($request);
 
         return response()->json(['message' => 'Created successfully!', 'id' => $score->id], 200, [], JSON_UNESCAPED_UNICODE);

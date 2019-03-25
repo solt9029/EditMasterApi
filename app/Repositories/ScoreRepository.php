@@ -25,7 +25,11 @@ class ScoreRepository implements ScoreRepositoryInterface
      */
     public function findById($id)
     {
-        return $this->score->find($id);
+        $score = $this->score->find($id);
+
+        $score->notes = json_decode($score->notes);
+
+        return $score;
     }
 
     /**
@@ -52,7 +56,13 @@ class ScoreRepository implements ScoreRepositoryInterface
             }
         });
 
-        return $query->orderBy('id', 'DESC')->take($count)->get();
+        $scores = $query->orderBy('id', 'DESC')->take($count)->get();
+
+        foreach ($scores as $score) {
+            $score->notes = json_decode($score->notes);
+        }
+
+        return $scores;
     }
 
     /**
@@ -70,9 +80,13 @@ class ScoreRepository implements ScoreRepositoryInterface
         foreach ($columns as $column) {
             $query->orWhere($column, 'like', "%{$keyword}%");
         }
-        $scores = $query->latest('id')->paginate($page_num);
+        $result = $query->latest('id')->paginate($page_num);
 
-        return $scores;
+        foreach ($result->getCollection() as $score) {
+            $score->notes = json_decode($score->notes);
+        }
+
+        return $result;
     }
 
     /**
@@ -90,7 +104,7 @@ class ScoreRepository implements ScoreRepositoryInterface
             'video_id' => $data->video_id,
             'bpm' => $data->bpm,
             'offset' => $data->offset,
-            'notes' => $data->notes,
+            'notes' => json_encode($data->notes),
             'speed' => $data->speed,
             // 'advanced_settings' => null,
         ]);
