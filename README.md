@@ -42,6 +42,13 @@ mysql -uroot -pphpapptest editmaster < /docker/181115-insert-scores.sql # insert
 exit
 ```
 
+## Release
+
+```
+git tag v*.*
+git push origin v*.*
+```
+
 ## Backup
 
 - on the server
