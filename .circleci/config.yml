@@ -15,8 +15,6 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo docker-php-ext-install
-
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
