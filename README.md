@@ -14,7 +14,8 @@
 - php: 7.1.16
 
 ## Setup
-### Docker
+
+- Docker
 
 ```sh
 git clone git@github.com:solt9029/EditMasterApi.git
@@ -23,7 +24,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-### PHP
+- PHP
 
 ```sh
 docker-compose exec php bash
@@ -35,7 +36,7 @@ php artisan migrate
 exit
 ```
 
-### MySQL
+- MySQL
 
 ```sh
 docker-compose exec mysql bash
