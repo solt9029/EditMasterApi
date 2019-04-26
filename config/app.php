@@ -107,6 +107,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'faker_locale' => 'ja_JP',
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

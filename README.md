@@ -28,7 +28,7 @@ docker-compose up -d
 docker-compose exec php bash
 composer install
 cp .env.example .env
-# edit .env file.
+vi .env # edit config here.
 php artisan key:generate
 php artisan migrate
 exit
@@ -40,6 +40,15 @@ exit
 docker-compose exec mysql bash
 mysql -uroot -pphpapptest editmaster < /docker/181115-insert-scores.sql # insert data dumped on 2018/11/15 into scores table.
 exit
+```
+
+## Test
+
+```
+touch database/database.sqlite
+cp .env.testing.example .env.testing
+vi .env.testing # edit config here.
+./vendor/bin/phpunit
 ```
 
 ## Release

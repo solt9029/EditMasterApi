@@ -27,7 +27,9 @@ class ScoreRepository implements ScoreRepositoryInterface
     {
         $score = $this->score->find($id);
 
-        $score->notes = json_decode($score->notes);
+        if (null !== $score) {
+            $score->notes = json_decode($score->notes);
+        }
 
         return $score;
     }

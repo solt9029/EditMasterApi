@@ -38,7 +38,7 @@ class ScoresController extends Controller
     {
         $score = $this->score_repository->findById($id);
         if (!$score) {
-            return false;
+            return response()->json(['message' => 'Not found.'], 404, [], JSON_UNESCAPED_UNICODE);
         }
 
         return response()->json($score, 200, [], JSON_UNESCAPED_UNICODE);
