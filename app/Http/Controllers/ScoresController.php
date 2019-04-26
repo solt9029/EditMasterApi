@@ -48,6 +48,6 @@ class ScoresController extends Controller
     {
         $score = $this->score_repository->create($request);
 
-        return response()->json(['message' => 'Created successfully!', 'id' => $score->id], 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($score, 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
