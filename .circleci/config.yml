@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.2.1-apache-node-browsers
+
+    environment:
+      - APP_DEBUG: true
+      - APP_ENV: testing
+      - APP_KEY: base64:0k2D0m+3fn/YcMedglFM3jd9cZKo6d3jCz0Jp230tcs=
+      - DB_CONNECTION: sqlite
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run: sudo docker-php-ext-install
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+
+      - run: touch database/database.sqlite
+      - run: composer phpunit
