@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * @OA\Info(
  *     title="EditMasterApi",
  *     description="EditMasterApi document",
