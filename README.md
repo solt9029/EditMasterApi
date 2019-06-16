@@ -49,20 +49,19 @@ exit
 - phpdocs
 
 ```sh
-# install phpDocumentor
+# install phpDocumentor.
 cd vendor/bin
 wget http://phpdoc.org/phpDocumentor.phar
 cd ../../
 
-php vendor/bin/phpDocumentor.phar -d . --ignore vendor/ -t phpdocs/
-php -S localhost:8085 # check
+php vendor/bin/phpDocumentor.phar -d . --ignore vendor/ -t phpdocs/ # generate document.
+php -S localhost:8085 # check document.
 ```
 
 - openapi
 
 ```sh
-composer openapi
-php -S localhost:8086 # check
+composer openapi # generate document.
 ```
 
 ## Test
