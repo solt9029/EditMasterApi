@@ -34,6 +34,28 @@ class ScoresController extends Controller
         return response()->json($scores, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/scores/{id}",
+     *     description="show score",
+     *     tags={"scores"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="score id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not Found"
+     *     ),
+     * )
+     */
     public function show($id)
     {
         $score = $this->score_repository->findById($id);

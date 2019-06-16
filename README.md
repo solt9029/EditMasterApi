@@ -44,13 +44,34 @@ mysql -uroot -pphpapptest editmaster < /docker/181115-insert-scores.sql # insert
 exit
 ```
 
+## Docs
+
+- phpdocs
+
+```sh
+# install phpDocumentor
+cd vendor/bin
+wget http://phpdoc.org/phpDocumentor.phar
+cd ../../
+
+php vendor/bin/phpDocumentor.phar -d . --ignore vendor/ -t phpdocs/
+php -S localhost:8085 # check
+```
+
+- openapi
+
+```sh
+composer openapi
+php -S localhost:8086 # check
+```
+
 ## Test
 
 ```sh
 touch database/database.sqlite
 cp .env.testing.example .env.testing
 vi .env.testing # edit config here.
-./vendor/bin/phpunit
+composer phpunit
 ```
 
 ## Release

@@ -10,7 +10,8 @@
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.8",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "zircote/swagger-php": "^3.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -50,7 +51,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-        "phpunit": "phpunit"
+        "phpunit": "phpunit",
+        "openapi": "openapi -o public/openapi/openapi.json --format json app/Http/Controllers/"
     },
     "config": {
         "preferred-install": "dist",
