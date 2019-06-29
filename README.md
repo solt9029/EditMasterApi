@@ -44,9 +44,7 @@ mysql -uroot -pphpapptest editmaster < /docker/181115-insert-scores.sql # insert
 exit
 ```
 
-## Docs
-
-- phpdocs
+## PHPDocs
 
 ```sh
 # install phpDocumentor.
@@ -56,12 +54,6 @@ cd ../../
 
 php vendor/bin/phpDocumentor.phar -d . --ignore vendor/ -t phpdocs/ # generate document.
 php -S localhost:8085 # check document.
-```
-
-- openapi
-
-```sh
-composer openapi # generate document.
 ```
 
 ## Test

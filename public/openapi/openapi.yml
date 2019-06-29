@@ -1,0 +1,27 @@
+openapi: 3.0.1
+info:
+  title: EditMasterApi
+  description: EditMasterApi document
+  contact:
+    email: atemu1212@yahoo.co.jp
+  version: 1.0.0
+paths:
+  /scores/{id}:
+    get:
+      tags:
+      - score
+      description: show score
+      parameters:
+      - name: id
+        in: path
+        description: score id
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: success
+          content: {}
+        404:
+          description: not found
+          content: {}
