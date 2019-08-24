@@ -1,8 +1,10 @@
-version: '2'
+version: '3'
 
 services:
   php:
-    build: ./docker/php
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
     environment:
       - APACHE_DOCUMENT_ROOT=/php/public
       - TZ=Asia/Tokyo

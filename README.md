@@ -53,6 +53,7 @@ wget http://phpdoc.org/phpDocumentor.phar
 cd ../../
 
 php vendor/bin/phpDocumentor.phar -d . --ignore vendor/ -t phpdocs/ # generate document.
+cd phpdocs
 php -S localhost:8085 # check document.
 ```
 
