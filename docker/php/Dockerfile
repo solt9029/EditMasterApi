@@ -1,5 +1,8 @@
 FROM php:7.2-apache
 
+ENV APACHE_DOCUMENT_ROOT="/docker/public"
+ENV TZ="Asia/Tokyo"
+
 # timezone Asia/Tokyo (https://qiita.com/prg_yukke/items/c23419d779d7f6972258)
 RUN echo "${TZ}" > /etc/timezone \
   && dpkg-reconfigure -f noninteractive tzdata

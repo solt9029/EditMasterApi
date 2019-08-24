@@ -5,9 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
-    environment:
-      - APACHE_DOCUMENT_ROOT=/docker/public
-      - TZ=Asia/Tokyo
     ports:
       - "8051:80"
     volumes:
