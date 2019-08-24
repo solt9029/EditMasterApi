@@ -48,11 +48,11 @@ exit
 
 ```sh
 # install phpDocumentor.
-cd vendor/bin
+cd src/vendor/bin
 wget http://phpdoc.org/phpDocumentor.phar
-cd ../../
+cd ../../../
 
-php vendor/bin/phpDocumentor.phar -d . --ignore vendor/ -t phpdocs/ # generate document.
+php src/vendor/bin/phpDocumentor.phar -d . --ignore src/vendor/ -t phpdocs/ # generate document.
 cd phpdocs
 php -S localhost:8085 # check document.
 ```
@@ -60,6 +60,7 @@ php -S localhost:8085 # check document.
 ## Test
 
 ```sh
+cd src
 touch database/database.sqlite
 cp .env.testing.example .env.testing
 vi .env.testing # edit config here.

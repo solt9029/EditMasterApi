@@ -25,8 +25,9 @@ WORKDIR /
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv /composer.phar /usr/local/bin/composer
 
-WORKDIR /php
-COPY . /php
+WORKDIR /docker
+ADD ./src /docker
+RUN chmod 775 -R storage && chmod 775 -R bootstrap/cache
 
 EXPOSE 80
 
