@@ -9,6 +9,7 @@ services:
       - "8051:80"
     volumes:
       - ./src:/docker
+      - /docker/vendor
     depends_on:
       - mysql
   mysql:
