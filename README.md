@@ -13,6 +13,8 @@
 
 - php: 7.1.16
 
+- composer: 1.9.0
+
 ## Setup
 
 - Docker
@@ -22,13 +24,14 @@ git clone git@github.com:solt9029/EditMasterApi.git
 cd EditMasterApi
 docker-compose build
 docker-compose up -d
+cd src
+composer install
 ```
 
 - PHP
 
 ```sh
 docker-compose exec php bash
-composer install
 cp .env.example .env
 vi .env # edit config here.
 php artisan key:generate
@@ -48,17 +51,19 @@ exit
 
 ```sh
 # install phpDocumentor.
-cd vendor/bin
+cd src/vendor/bin
 wget http://phpdoc.org/phpDocumentor.phar
-cd ../../
+cd ../../../
 
-php vendor/bin/phpDocumentor.phar -d . --ignore vendor/ -t phpdocs/ # generate document.
+php src/vendor/bin/phpDocumentor.phar -d . --ignore src/vendor/ -t phpdocs/ # generate document.
+cd phpdocs
 php -S localhost:8085 # check document.
 ```
 
 ## Test
 
 ```sh
+cd src
 touch database/database.sqlite
 cp .env.testing.example .env.testing
 vi .env.testing # edit config here.

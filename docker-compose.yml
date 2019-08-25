@@ -1,15 +1,14 @@
-version: '2'
+version: '3'
 
 services:
   php:
-    build: ./docker/php
-    environment:
-      - APACHE_DOCUMENT_ROOT=/php/public
-      - TZ=Asia/Tokyo
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
     ports:
       - "8051:80"
     volumes:
-      - .:/php
+      - ./src:/docker
     depends_on:
       - mysql
   mysql:

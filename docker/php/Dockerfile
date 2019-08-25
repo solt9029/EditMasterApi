@@ -1,9 +1,12 @@
 FROM php:7.2-apache
 
+ENV APACHE_DOCUMENT_ROOT="/docker/public"
+ENV TZ="Asia/Tokyo"
+
 # timezone Asia/Tokyo (https://qiita.com/prg_yukke/items/c23419d779d7f6972258)
 RUN echo "${TZ}" > /etc/timezone \
   && dpkg-reconfigure -f noninteractive tzdata
-ADD ./php.ini /usr/local/etc/php/php.ini
+ADD ./docker/php/php.ini /usr/local/etc/php/php.ini
 
 # document root (https://hub.docker.com/_/php/)
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
@@ -25,6 +28,11 @@ WORKDIR /
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv /composer.phar /usr/local/bin/composer
 
-WORKDIR /php
+WORKDIR /docker
+ADD ./src /docker
+RUN chmod 775 -R storage && chmod 775 -R bootstrap/cache
+RUN composer install
+
+EXPOSE 80
 
 CMD ["apache2-foreground"]
