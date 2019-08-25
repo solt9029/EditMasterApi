@@ -11,6 +11,7 @@
 |
 */
 
+Route::get('/', 'HealthCheckController@index');
 Route::get('/scores/timeline', 'ScoresController@timeline');
 Route::get('/scores/{id}', 'ScoresController@show');
 Route::post('/scores/create', 'ScoresController@create');

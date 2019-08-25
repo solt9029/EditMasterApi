@@ -31,6 +31,7 @@ RUN mv /composer.phar /usr/local/bin/composer
 WORKDIR /docker
 ADD ./src /docker
 RUN chmod 775 -R storage && chmod 775 -R bootstrap/cache
+RUN composer install
 
 EXPOSE 80
 
