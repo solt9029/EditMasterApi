@@ -92,6 +92,21 @@ mysqldump -u root -pphpapptest --no-create-info editmaster scores > /docker/XXXX
 scp root@solt9029.com:/usr/share/nginx/html/EditMasterApi/docker/mysql/XXXXXX-insert-scores.sql ~/Desktop
 ```
 
+## Docker
+
+- PHP
+
+```sh
+docker build -t TAG_NAME:latest -f docker/php/Dockerfile .
+```
+
+- MySQL
+
+```sh
+cd docker/mysql
+docker build -t TAG_NAME:latest .
+```
+
 ## Deploy to GKE
 
 ```sh
