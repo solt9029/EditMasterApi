@@ -13,6 +13,8 @@
 
 - php: 7.1.16
 
+- composer: 1.9.0
+
 ## Setup
 
 - Docker
@@ -22,13 +24,14 @@ git clone git@github.com:solt9029/EditMasterApi.git
 cd EditMasterApi
 docker-compose build
 docker-compose up -d
+cd src
+composer install
 ```
 
 - PHP
 
 ```sh
 docker-compose exec php bash
-composer install
 cp .env.example .env
 vi .env # edit config here.
 php artisan key:generate

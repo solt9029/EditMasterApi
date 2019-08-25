@@ -3,34 +3,26 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-apache
-
     environment:
-      - APP_DEBUG: true
-      - APP_ENV: testing
-      - APP_KEY: base64:0k2D0m+3fn/YcMedglFM3jd9cZKo6d3jCz0Jp230tcs=
-      - DB_CONNECTION: sqlite
-
+      APP_DEBUG: "true"
+      APP_ENV: "testing"
+      APP_KEY: "base64:0k2D0m+3fn/YcMedglFM3jd9cZKo6d3jCz0Jp230tcs="
+      DB_CONNECTION: "sqlite"
     working_directory: ~/repo
-
     steps:
       - checkout
-
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "src/composer.json" }}
           - v1-dependencies-
-
       - run:
           command: composer install -n --prefer-dist
           working_directory: src
-
       - save_cache:
           paths:
             - ./src/vendor
           key: v1-dependencies-{{ checksum "src/composer.json" }}
-
       - run: touch src/database/database.sqlite
-
       - run:
           command: composer phpunit
           working_directory: src
