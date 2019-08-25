@@ -77,7 +77,7 @@ git tag v*.*
 git push origin v*.*
 ```
 
-## Backup
+## Backup on VPS
 
 - on the server
 
@@ -96,4 +96,21 @@ mysqldump -u root -pphpapptest --no-create-info editmaster scores > /docker/XXXX
 
 ```sh
 scp root@solt9029.com:/usr/share/nginx/html/EditMasterApi/docker/mysql/XXXXXX-insert-scores.sql ~/Desktop
+```
+
+## Deploy to GKE
+
+```sh
+cd kubernetes
+cp secret.yaml.example secret.yaml
+vi secret.yaml # edit config here. you can get base64 encoded value by using (echo -n "value" | base64)
+gcloud config set project PROJECT_ID
+gcloud config set compute/zone asia-northeast1-a
+gcloud container clusters create CLUSTER_NAME --machine-type=n1-standard-1 --num-nodes=3
+gcloud container clusters get-credentials CLUSTER_NAME
+kubectl apply -f storage-class.yaml
+kubectl apply -f secret.yaml
+kubectl apply -f mysql.yaml
+kubectl apply -f php.yaml
+kubectl apply -f ingress.yaml
 ```
