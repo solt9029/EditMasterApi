@@ -120,6 +120,7 @@ gcloud container clusters get-credentials CLUSTER_NAME
 kubectl apply -f storage-class.yaml
 kubectl apply -f secret.yaml
 kubectl apply -f mysql.yaml
+kubectl apply -f migration-job.yaml
 kubectl apply -f php.yaml
 kubectl apply -f ingress.yaml
 ```
