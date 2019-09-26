@@ -111,6 +111,10 @@ class ScoreRepository implements ScoreRepositoryInterface
             // 'advanced_settings' => null,
         ]);
 
+        if (null !== $score) {
+            $score->notes = json_decode($score->notes);
+        }
+
         return $score;
     }
 }
