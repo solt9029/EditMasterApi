@@ -66,4 +66,4 @@ spec:
           valueFrom:
             secretKeyRef:
               name: secret
-              key: db_password
+              key: youtube_api_key
