@@ -37,33 +37,57 @@ spec:
         - containerPort: 80
         env:
         - name: APP_NAME
-          value: "Laravel"
+          valueFrom:
+            configMapKeyRef:
+              name: configmap
+              key: APP_NAME
         - name: APP_ENV
-          value: "production"
+          valueFrom:
+            configMapKeyRef:
+              name: configmap
+              key: APP_ENV
         - name: APP_KEY
           valueFrom:
             secretKeyRef:
               name: secret
-              key: app_key
+              key: APP_KEY
         - name: APP_DEBUG
-          value: "false"
+          valueFrom:
+            configMapKeyRef:
+              name: configmap
+              key: APP_DEBUG
         - name: DB_CONNECTION
-          value: "mysql"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_CONNECTION
         - name: DB_HOST
-          value: "mysql"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_HOST
         - name: DB_PORT
-          value: "3306"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_PORT
         - name: DB_DATABASE
-          value: "editmaster"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_DATABASE
         - name: DB_USERNAME
-          value: "root"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: secret
-              key: db_password
+              key: DB_PASSWORD
         - name: YOUTUBE_API_KEY
           valueFrom:
             secretKeyRef:
               name: secret
-              key: youtube_api_key
+              key: YOUTUBE_API_KEY

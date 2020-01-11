@@ -44,9 +44,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: secret
-              key: db_password
+              key: DB_PASSWORD
         - name: MYSQL_DATABASE
-          value: "editmaster"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_DATABASE
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql

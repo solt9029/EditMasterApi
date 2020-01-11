@@ -16,18 +16,33 @@ spec:
         - "php artisan migrate --force"
         env:
         - name: DB_CONNECTION
-          value: "mysql"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_CONNECTION
         - name: DB_HOST
-          value: "mysql"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_HOST
         - name: DB_PORT
-          value: "3306"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_PORT
         - name: DB_DATABASE
-          value: "editmaster"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_DATABASE
         - name: DB_USERNAME
-          value: "root"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: secret
-              key: db_password
+              key: DB_PASSWORD
       restartPolicy: Never
