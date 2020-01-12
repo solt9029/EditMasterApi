@@ -97,29 +97,102 @@ scp root@solt9029.com:/usr/share/nginx/html/EditMasterApi/docker/mysql/XXXXXX-in
 - PHP
 
 ```sh
-docker build -t TAG_NAME:latest -f docker/php/Dockerfile .
+PROJECT_ID=editmaster
+APP=php
+docker build -t gcr.io/${PROJECT_ID}/${APP}:latest -f docker/php/Dockerfile .
+docker push gcr.io/${PROJECT_ID}/${APP}:latest
 ```
 
 - MySQL
 
 ```sh
+PROJECT_ID=editmaster
+APP=mysql
 cd docker/mysql
-docker build -t TAG_NAME:latest .
+docker build -t gcr.io/${PROJECT_ID}/${APP}:latest .
+docker push gcr.io/${PROJECT_ID}/${APP}:latest
 ```
 
 ## Deploy to GKE
 
+- Using StorageClass
+
 ```sh
+PROJECT_ID=editmaster
+CLUSTER_NAME=editmaster-cluster
+MACHINE_TYPE=n1-standard-1
+NUM_NODES=3
+ZONE=asia-northeast1-a
+
+gcloud config set project $PROJECT_ID
+gcloud container clusters create $CLUSTER_NAME \ 
+ --machine-type=$MACHINE_TYPE \ 
+ --num-nodes=$NUM_NODES \ 
+ --zone=$ZONE
+gcloud container clusters get-credentials $CLUSTER_NAME
+
 cd kubernetes
 cp secret.yaml.example secret.yaml
-vi secret.yaml # edit config here. you can get base64 encoded value by using (echo -n "value" | base64)
-gcloud config set project PROJECT_ID
-gcloud config set compute/zone asia-northeast1-a
-gcloud container clusters create CLUSTER_NAME --machine-type=n1-standard-1 --num-nodes=3
-gcloud container clusters get-credentials CLUSTER_NAME
+vi secret.yaml
+cp configmap.yaml.example configmap.yaml
+vi configmap.yaml
+
 kubectl apply -f storage-class.yaml
 kubectl apply -f secret.yaml
+kubectl apply -f configmap.yaml
 kubectl apply -f mysql.yaml
+kubectl apply -f migration-job.yaml
+kubectl apply -f php.yaml
+kubectl apply -f ingress.yaml
+```
+
+- Using CloudSQL
+
+```sh
+PROJECT_ID=editmaster
+CLUSTER_NAME=editmaster-cluster
+MACHINE_TYPE=n1-standard-1
+NUM_NODES=3
+ZONE=asia-northeast1-a
+NETWORK_NAME=editmaster-network
+SUBNET_NAME=editmaster-subnet
+REGION=asia-northeast1
+RANGE=10.0.0.0/9
+
+gcloud config set project $PROJECT_ID
+gcloud compute networks create $NETWORK_NAME --subnet-mode custom
+gcloud compute networks subnets create $SUBNET_NAME \
+ --network $NETWORK_NAME \
+ --region $REGION \
+ --range $RANGE
+gcloud compute firewall-rules create ${NETWORK_NAME}-rule \
+ --network $NETWORK_NAME \
+ --allow tcp:80,icmp
+gcloud container clusters create $CLUSTER_NAME \
+ --zone=$ZONE \
+ --network=$NETWORK_NAME \
+ --subnetwork=$SUBNET_NAME \
+ --enable-ip-alias \
+ --cluster-ipv4-cidr=/16 \
+ --services-ipv4-cidr=/22 \
+ --num-nodes=$NUM_NODES \
+ --machine-type=$MACHINE_TYPE \
+ --no-enable-basic-auth \
+ --no-issue-client-certificate \
+ --metadata disable-legacy-endpoints=true \
+ --preemptible
+gcloud container clusters get-credentials $CLUSTER_NAME
+
+# create CloudSQL instance using PrivateIP on dashboard.
+
+cd kubernetes
+cp secret.yaml.example secret.yaml
+vi secret.yaml
+cp configmap.yaml.example configmap.yaml
+vi configmap.yaml
+
+kubectl apply -f secret.yaml
+kubectl apply -f configmap.yaml
 kubectl apply -f migration-job.yaml
 kubectl apply -f php.yaml
 kubectl apply -f ingress.yaml
