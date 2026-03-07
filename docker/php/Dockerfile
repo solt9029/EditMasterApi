@@ -13,6 +13,9 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # install extensions (https://stackoverflow.com/questions/36674667/png-h-file-not-found-linux)
+RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list \
+  && sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list \
+  && sed -i '/buster-updates/d' /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y libpng-dev
 RUN docker-php-ext-install pdo_mysql mysqli mbstring gd
