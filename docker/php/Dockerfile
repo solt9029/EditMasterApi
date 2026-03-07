@@ -26,9 +26,9 @@ RUN apt-get install -y zip unzip
 # enable mod_rewrite (http://murayama.hatenablog.com/entry/2015/09/10/081522)
 RUN a2enmod rewrite
 
-# install composer
+# install composer 1.x (Laravel 5.7 is incompatible with Composer 2.x)
 WORKDIR /
-RUN curl -sS https://getcomposer.org/installer | php
+RUN curl -sS https://getcomposer.org/installer | php -- --1
 RUN mv /composer.phar /usr/local/bin/composer
 
 WORKDIR /docker
